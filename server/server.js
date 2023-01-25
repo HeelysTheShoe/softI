@@ -3,8 +3,11 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const videoControllers = require("./middlewares/videoControllers");
+const userController = require('./middlewares/userController');
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
+const mongoose = require('mongoose');
+const PORT = 3000;
 
 const { uploadFile, fetchFiles } = videoControllers;
 
@@ -19,9 +22,17 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-const PORT = 3000;
+const mongoURI = 'mongodb+srv://Lawliang:0aC47yXDQDqPLxVW@cluster0.dh7sr4i.mongodb.net/?retryWrites=true&w=majority'
+mongoose.connect(mongoURI);
 
+app.post("/login", userController.checkLogin, (req, res) => {
+  res.status(200).json({loggedIn: res.locals.checkLogin });
+});
 
+app.post("/usersignup", userController.saveUserToDB, (req, res) => {
+  res.status(200).json({userCreated: res.locals.saveUserToDB});
+});
+// res.status(200).json({loggedIn: res.locals.loggedIn});
 app.post("/video", upload.single("file"), uploadFile, (req, res) => {
   res.status(200).send("video uploaded");
 });

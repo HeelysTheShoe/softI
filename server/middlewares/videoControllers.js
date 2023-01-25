@@ -2,7 +2,6 @@ const fs = require("fs");
 const AWS = require("aws-sdk");
 const dotenv = require('dotenv').config();
 
-
 const s3 = new AWS.S3({
   //the access key id and secret access key are protected in an .env file
   accessKeyId: process.env.accessKeyId,
@@ -55,6 +54,7 @@ videoControllers.fetchFiles = async (req, res, next) => {
   const params = {
     Bucket: "softi-iteration",
   };
+  console.log(process.env.accessKeyId);
 
   const getNum = () => {
     return new Promise((resolve, reject) => {
