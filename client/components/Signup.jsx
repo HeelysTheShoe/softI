@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import logo from "../img/logo.png";
 import "../styles.css";
 
 export default function Signup() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: '',
     password: ''
@@ -18,16 +19,21 @@ export default function Signup() {
 
   const createUser = (e) => {
     e.preventDefault(); 
-    fetch('/usersignup', {
+    //http://localhost:3000/usersignup
+    fetch('http://localhost:3000/usersignup', {
         method: 'POST',
-        body: JSON.stringify({ username, password })
+        headers: {
+          'Content-Type': 'application/JSON',
+        },
+        body: JSON.stringify(user)
       })
         .then((data)=>data.json())
         .then((data)=>{
             if (data.userCreated === true){
-              return redirect('/login');
-            }else{
-                alert("Error signing up. Please try again")
+              console.log('inside userCreated if');
+              navigate('/');
+            } else{
+              alert("Error signing up. Please try again")
             }
         })
       }
@@ -54,7 +60,10 @@ export default function Signup() {
             placeholder='Password'
             onChange = {(event) => {userSetter(event)}}
             required></input>
-            <button className='login-btn' onClick={(e) => {createUser(e)}}>
+            <button className='login-btn' onClick={(e) => {
+              createUser(e);
+            }
+              }>
              Signup
             </button>
         </form>

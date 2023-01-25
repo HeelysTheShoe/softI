@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userLogin } from "../redux/questionSlice";
 import logo from "../img/logo.png";
@@ -7,6 +7,7 @@ import "../styles.css";
 
 export default function Login() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     username: '',
     password: ''
@@ -20,14 +21,17 @@ export default function Login() {
 
   const verifyUser = (e) => {
     e.preventDefault(); 
-    fetch('/login', {
+    fetch('http://localhost:3000/login', {
         method: 'POST',
-        body: JSON.stringify({ username, password })
+        headers: {
+          'Content-Type': 'application/JSON', 
+        },
+        body: JSON.stringify(user)
       })
         .then((data)=>data.json())
         .then((data)=>{
             if (data.loggedIn === true){
-              return redirect('/home');
+              return navigate('/home');
             }else{
                 alert("Wrong username or password. Please try again.")
             }
