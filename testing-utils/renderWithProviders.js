@@ -4,13 +4,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 import questionReducer from "../client/redux/questionSlice"
 import { BrowserRouter } from 'react-router-dom'
+import {setupStore, initialState} from './setupStore'
 
 export function renderWithProviders(
   ui,
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
-    store = configureStore({ reducer : { question: questionReducer }, preloadedState }),
+    store = setupStore(preloadedState),
     ...renderOptions
   } = {}
 ) {

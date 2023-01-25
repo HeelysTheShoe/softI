@@ -1,13 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import { Provider } from 'react-redux';
-import Login from '../client/components/Login.jsx';
 import App from '../client/App.jsx'
-import { renderWithProviders } from '../testing-utils/renderWithProviders'
-import { server } from '../__mocks__/server'
-import { startSession } from '../client/redux/questionSlice.js';
-import reducer from '../client/redux/questionSlice'
-import QuestionBox from '../client/components/QuestionBox.jsx';
+import { renderWithProviders, initalState } from '../testing-utils/renderWithProviders'
+import { formatState } from '../testing-utils/formatState'
+
 
 
 describe('Landing page', () => {
@@ -66,9 +62,26 @@ describe('Login functionality', () => {
   })
 
   test('Should render buttons after next has been clicked three times', () => {
-
-    const res = renderWithProviders(<App/>, {isLoggedIn: true, isSessionStarted: true, currentQuestion: 2})
-    screen.debug();
+    // const initialState = {question: {
+    //   questions: [
+    //     "Tell me about yourself?",
+    //     "What made you decide to get into tech?",
+    //     "Have you ever had a project that had to change drastically while it was in progress? Tell me about it?",
+    //     "Tell me about a major setback you’ve had, and how you handled it?",
+    //     "Talk about a time where you had to make an important decision quickly?",
+    //     "Have you ever had a deadline you were not able to meet, and how did you handle it?",
+    //     "Talk about a time when you had to adapt to significant changes at work?",
+    //     "Have you ever had to convince your team to do a job they were reluctant to do?",
+    //     "Dicuss any positive contributions you've made to your previous organization, be as specific as possible with real world examples.",
+    //   ],
+    //   questionSet: [],
+    //   isLoggedIn: 'Blah',
+    //   isSessionStarted: false,
+    //   user: {},
+    //   currentQuestion: 0
+    // }}
+    const res = renderWithProviders(<App/>, {preloadedState: formatState({isLoggedIn: true})})
+    expect(res.store.getState().question.isLoggedIn).toEqual(true);
     // const stopCaptureButton = res.getByRole('button', {name: 'Stop Capture'});
     // const uploadButton = res.getByRole('button', {name: 'Upload'});
     // const endSessionButton = res.getByRole('button', {name: 'End Session'});
