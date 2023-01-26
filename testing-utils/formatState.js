@@ -25,6 +25,5 @@ export function formatState (object){
             return 'Invalid key in input'
         }
     }
-    console.log(initialState)
     return initialState
 }
