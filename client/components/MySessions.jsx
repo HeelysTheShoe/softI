@@ -39,7 +39,6 @@ function PreviousSession() {
     <>
       <video src={view} width="700" height="700" controls></video>
       <select onChange={(e) => handleChange(e.target.value)}>{records}</select>
-      <p>test</p>
     </>
   );
 }

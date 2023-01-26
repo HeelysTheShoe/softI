@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx"
 import UserPage from "./components/UserPage.jsx"
+import Protected from './components/Protected.jsx'
 import "./styles.css";
 
 function App() {
@@ -21,7 +22,7 @@ function App() {
         {/* //default route is the login screen */}
         <Route path='/' element={<Login />} />
         {/* after authenticated, we can route to home */}
-        <Route path='/home' element={<Home />} />
+        <Route path='/home' element={<Protected><Home /></Protected>} />
         <Route path='/signup' element = {<Signup/>}/>
         <Route path='/userPage' element={<UserPage/>}/>
       </Routes>
