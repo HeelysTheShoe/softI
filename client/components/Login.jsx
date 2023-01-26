@@ -31,6 +31,8 @@ export default function Login() {
         .then((data)=>data.json())
         .then((data)=>{
             if (data.loggedIn === true){
+              //change to '/userPage' once that is set up
+              dispatch(userLogin(user.username));
               return navigate('/home');
             }else{
                 alert("Wrong username or password. Please try again.")
@@ -61,7 +63,9 @@ export default function Login() {
             placeholder='Password'
             onChange = {(event) => {userSetter(event)}}
             required></input>
-            <button className='login-btn' onClick={(e) => {verifyUser(e)}}>
+            <button className='login-btn' onClick={(e) => {
+              verifyUser(e)}
+                }>
               Login
             </button>
         </form>
