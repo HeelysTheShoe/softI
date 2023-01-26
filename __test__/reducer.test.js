@@ -29,7 +29,7 @@ describe('Testing redux reducers', () => {
   })
 
   test('should change isLoggedIn in state when a userLogin dispatch is triggered', () => {
-    expect(reducer(initialState, userLogin(''))).toEqual({ ...initialState, isLoggedIn: true })
+    expect(reducer(initialState, userLogin('username'))).toEqual({ ...initialState, isLoggedIn: true, user:{'username':'username'} })
   })
 
   test('should start session & return a random question when startSession dispatch is triggered', () => {
