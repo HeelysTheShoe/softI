@@ -22,9 +22,9 @@ function App() {
         {/* after authenticated, we can route to home */}
         <Route path='/home' element={<Home />} />
         <Route path='/signup' element = {<Signup/>}/>
+        {/* <Route path='/userPage' element={<Homepage/>}/> */}
       </Routes>
-      {/* <p>Login Status: {String(loginStatus)}</p> */}
-      {/* {loginStatus ? <Home /> : <Login />} */}
+
     </div>
   );
 }

@@ -43,7 +43,7 @@ export default function Signup() {
       <div className='loginBox'>
         <h1>
           <img id='logo' src={logo}></img>
-          Signup with Softi
+          <p> Signup with Softi</p>
         </h1>
         <form id='loginForm' method = 'post'>
           <input

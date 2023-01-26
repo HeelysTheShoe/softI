@@ -43,8 +43,9 @@ export default function Login() {
       <div className='loginBox'>
         <h1>
           <img id='logo' src={logo}></img>
-          Softi
+           Softi
         </h1>
+        <p> Your Interviewing Pal </p>
         <form id='loginForm' method = 'post'>
           <input
             type='text'
@@ -64,7 +65,7 @@ export default function Login() {
               Login
             </button>
         </form>
-        <Link to='/signup'> <p style = {{color: 'white'}}>Don't have an account? Sign up here</p> </Link>
+      <Link to='/signup'> <p style = {{color: 'white', fontSize: '15px'}}>Don't have an account? <br></br>Sign up here</p> </Link>
       </div>
     </div>
   );
