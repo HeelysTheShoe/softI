@@ -8,10 +8,9 @@ import '../styles.css';
 export default function Home() {
   const dispatch = useDispatch();
   const sessionStatus = useSelector((state) => state.question.isSessionStarted);
-
+  // const username = useSelector((state) => state.user.username);
   return (
     <div id="home">
-
       {/* <button onClick={() =>  }>Start</button> */}
       {sessionStatus ? <QuestionBox /> : <>
         <h2>Press "Start" to begin interview session.</h2>

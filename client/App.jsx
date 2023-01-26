@@ -4,6 +4,7 @@ import Home from "./components/Home.jsx";
 import { useSelector } from "react-redux";
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx"
+import UserPage from "./components/UserPage.jsx"
 import "./styles.css";
 
 function App() {
@@ -22,9 +23,9 @@ function App() {
         {/* after authenticated, we can route to home */}
         <Route path='/home' element={<Home />} />
         <Route path='/signup' element = {<Signup/>}/>
+        <Route path='/userPage' element={<UserPage/>}/>
       </Routes>
-      {/* <p>Login Status: {String(loginStatus)}</p> */}
-      {/* {loginStatus ? <Home /> : <Login />} */}
+
     </div>
   );
 }
