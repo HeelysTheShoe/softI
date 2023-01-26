@@ -1,6 +1,8 @@
 import reducer from "../client/redux/questionSlice";
 import { display, userLogin, startSession, nextQuestion, endSession } from "../client/redux/questionSlice";
 import { pickQuestion } from "../client/redux/questionSlice"
+import {store} from '../client/redux/store'
+
 
 const initialState = {
   questions: [
@@ -62,5 +64,10 @@ describe('Testing redux reducers', () => {
     })
   })
 
+describe('testing store', () => {
+  test('should create store', () => {
+      expect(store).toBeDefined()
+    })
+  })
 
 
