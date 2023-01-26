@@ -6,7 +6,7 @@ module.exports = {
         const {username, password} = req.body;
         userModel.create({username: username, password: password})
             .then(data => {
-                console.log('Successful save')
+                // console.log('Successful save')
                 res.locals.saveUserToDB = true; 
                 next();
             })
@@ -20,9 +20,10 @@ module.exports = {
         const {username, password} = req.body;
         userModel.findOne({username: username, password: password})
             .then(data => {
-                console.log(data)
-                res.locals.checkLogin = true;
-                next();
+                if (data.username === username && data.password == password){
+                    res.locals.checkLogin = true;
+                    return next();
+                }
             })
             .catch(err => next({
                 log: 'userController.checkLogin',
