@@ -1,7 +1,7 @@
 import { findAllByText, findByText, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import App from '../client/App.jsx'
-import { renderWithProviders, initalState } from '../testing-utils/renderWithProviders'
+import { renderWithProviders } from '../testing-utils/renderWithProviders'
 import userEvent from '@testing-library/user-event'
 import { formatState } from '../testing-utils/formatState'
 import { mockFetchVideo } from '../testing-utils/mockFetchVideo'
@@ -41,14 +41,11 @@ describe('Login functionality', () => {
     fetch.mockResponseOnce(JSON.stringify(video));
 
 
-    const res = renderWithProviders(<App />);
+    const res = renderWithProviders(<App />, {},['/']);
     const user = userEvent.setup();
     
-    await user.click(screen.getByText('Login'))
-
-    expect(await screen.findByText('Press "Start" to begin interview session.')).toBeInTheDocument();
-
-    
+    await user.click(screen.getByText('Login'));
+    expect(mockedUsedNavigate).toBeCalledWith('/home');
     
   })
 });
