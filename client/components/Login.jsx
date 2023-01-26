@@ -19,6 +19,10 @@ export default function Login() {
     console.log(user);
   };
 
+  const setData = (username) => {
+    localStorage.setItem('username', username);
+  }
+
   const verifyUser = (e) => {
     e.preventDefault(); 
     fetch('http://localhost:3000/login', {
@@ -33,6 +37,7 @@ export default function Login() {
             if (data.loggedIn === true){
               //change to '/userPage' once that is set up
               dispatch(userLogin(user.username));
+              setData(user.username);
               return navigate('/home');
             }else{
                 alert("Wrong username or password. Please try again.")

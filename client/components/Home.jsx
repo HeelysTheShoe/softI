@@ -7,15 +7,21 @@ import '../styles.css';
 
 export default function Home() {
   const dispatch = useDispatch();
+  // const username = localStorage.getItem('username');
+  const {username} = useSelector((state) => state.question.user);
+  console.log(username)
   const sessionStatus = useSelector((state) => state.question.isSessionStarted);
-  // const username = useSelector((state) => state.user.username);
   return (
     <div id="home">
-      {/* <button onClick={() =>  }>Start</button> */}
       {sessionStatus ? <QuestionBox /> : <>
-        <h2>Press "Start" to begin interview session.</h2>
+      <div>
+        <h1> Welcome {username}</h1>
+        <h1>Press "Start" to begin interview session.</h1>
         <button className="start-btn" onClick={() => dispatch(startSession())}>Start</button>
+        <div>
         <MySessions />
+        </div>
+        </div>
       </>}
 
 
