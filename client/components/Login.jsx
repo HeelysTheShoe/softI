@@ -11,7 +11,6 @@ export default function Login() {
   const [user, setUser] = useState({
     username: '',
     password: '',
-    veryifyUser: verifyUser
   }); 
 
   const userSetter = (event) => {
