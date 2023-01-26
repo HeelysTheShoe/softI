@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../redux/questionSlice";
 
 export default function UserPage(){
-    const username = useSelector(state => state.user);
+    const username = useSelector(state => state.user.username);
     console.log(username);
     <h1> {`Welcome ${username}`} </h1>
 }

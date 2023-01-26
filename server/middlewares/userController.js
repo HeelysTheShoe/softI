@@ -18,7 +18,7 @@ module.exports = {
     },
     checkLogin: (req, res, next) => {
         const {username, password} = req.body;
-        userModel.findOne({username: username, password: password})
+        userModel.findOne({username, password})
             .then(data => {
                 if (data.username === username && data.password == password){
                     res.locals.checkLogin = true;
@@ -31,7 +31,4 @@ module.exports = {
                 message: {err: 'userController.checkLogin - Error!'}
             }))
     }
-    // findUsersToDB: () => {
-    //     userModel.find()
-    // }
 }
