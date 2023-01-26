@@ -3,6 +3,7 @@ import React from 'react';
 import { renderWithProviders } from '../testing-utils/renderWithProviders'
 import Home from '../client/components/Home'
 
+
 describe('Home page renders', () => {
     
     jest.mock('./QuestionBox', () => ({
