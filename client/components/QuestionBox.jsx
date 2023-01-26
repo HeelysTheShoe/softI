@@ -11,11 +11,16 @@ export default function QuestionBox() {
   const dispatch = useDispatch();
   const currentQuestion = useSelector((state) => state.question.currentQuestion);
 
+  //use Ref: hook that allows developers to reference a value not needed for rendering
+  //persists values between renders
+  //tracks mutable value without enforcing a re-rendering - use case: access child component imperatively
   const webcamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const [capturing, setCapturing] = useState(false);
   const [recordedChunks, setRecordedChunks] = useState([]);
 
+  //useCallback allows for caching of a function definition between re-renders
+  //prevents function from before recreated, unless necessary 
   const handleDataAvailable = useCallback(
     ({ data }) => {
       if (data.size > 0) {

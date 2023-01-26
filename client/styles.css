@@ -1,34 +1,73 @@
 /* app.jsx STYLING */
 body {
-  background-image: linear-gradient(to right, #434343 0%, black 100%);
-  color: white;
-  font-family: sans-serif;
+  background: url('https://i.pinimg.com/originals/7a/c7/1e/7ac71e72373b0fb270b3a6d72e44eea3.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 100px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 #main {
   text-align: center;
-
 }
 
-/*Styling Logo */
-.logo {
-  color: #808eff;
+h1, p{
+  color: white; 
 }
 
-/* Login Styling */
-.login {}
-
-
-.login-title {
-  /* border: solid 2px white; */
-  display: inline-block;
+a{
+  text-decoration: whitesmoke underline;
+}
+.login{
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 
-.login-btn {}
+#logo{
+  border-radius: 1000px;
+  height: 80px; 
+  width: 80px;
+  margin-right: 5px; 
+}
 
-/* Home Styling */
+.loginBox{
+  background-color: #1A131E;
+  margin-left: 200px;
+  border: #DBDBDB 1px solid; 
+  border-radius: 50px;
+  padding: 20px; 
+  width: 300px; 
+  height: 400px;
+  text-align: center;
+}
 
 
+#loginForm{
+  display: flex;
+  flex-direction: column;
+  margin: 30px 30px;
+}
+
+.login-btn{
+  background-color: #246A73;
+}
+
+.userInfo{
+  background-color: white;
+  border: #DBDBDB 1px solid; 
+  border-radius: 5px;
+  height: 20px; 
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.userInfo:focus{ 
+  outline: none;
+  border: #dee1e5;
+  box-shadow: 2px 2px 4px 4px #dee1e5;
+}
+
+/* Inherited CSS*/
 .start-btn {
   align-items: center;
   appearance: none;
@@ -73,8 +112,6 @@ body {
   box-shadow: #3c4fe0 0 3px 7px inset;
   transform: translateY(2px);
 }
-
-/* Next Button*/
 
 .next-btn {
   appearance: none;
@@ -161,8 +198,5 @@ button {
 
 
 /* Question Box Styling */
-
-
-
 
 /* Question Styling */

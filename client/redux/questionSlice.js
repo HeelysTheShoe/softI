@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+//reducers: functions that take the current state and an action as arguments, and return a new state
+
+//Stretch feature: question bank from API
 const initialState = {
   questions: [
     "Tell me about yourself?",
@@ -18,26 +21,26 @@ const initialState = {
   user: {},
   currentQuestion: 0
 };
-
+//createSlice is a function that accepts an initialState (currently the array of int questions), 
+//an object of reducer functions (changes the state), and a 'slice name'
+//automatically generates action creators and action types (new standard approach from the switch statements used in Redux unit)
 export const questionSlice = createSlice({
   name: "question",
   initialState,
   reducers: {
-    display: (state, action) => {
-      console.log(action);
-      // console.log(state.value);
-    },
     userLogin: (state, action) => {
+      state.user.username = action.payload; 
       state.isLoggedIn = true;
+      console.log('inside redux', state.user.username)
     },
-    startSession: (state, action) => {
+    startSession: (state) => {
       state.isSessionStarted = true;
       state.questionSet = pickQuestion(state.questions);
     },
-    nextQuestion: (state, action) => {
+    nextQuestion: (state) => {
       state.currentQuestion++;
     },
-    endSession: (state, action) => {
+    endSession: (state) => {
       state.questionSet = [];
       state.currentQuestion = 0;
       state.isSessionStarted = false;
@@ -46,7 +49,7 @@ export const questionSlice = createSlice({
 });
 
 
-function pickQuestion(allQuestions) {
+export function pickQuestion(allQuestions) {
   let set = [];
   if (allQuestions.length < 3) return "not enough questions stored";
   for (let i = 0; i <= 2; i++) {

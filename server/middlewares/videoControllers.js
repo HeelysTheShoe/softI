@@ -1,9 +1,11 @@
 const fs = require("fs");
 const AWS = require("aws-sdk");
+const dotenv = require('dotenv').config();
 
 const s3 = new AWS.S3({
-  accessKeyId: "AKIAULV76D667P5FRC7R",
-  secretAccessKey: "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",
+  //the access key id and secret access key are protected in an .env file
+  accessKeyId: process.env.accessKeyId,
+  secretAccessKey: process.env.secretAccessKey, 
   region: "us-east-1",
 });
 
@@ -13,10 +15,9 @@ videoControllers.uploadFile = async (req, res, next) => {
   if (req.file == null) {
     return res.status(400).json({ message: "file not sent by the client" });
   }
-  console.log(req.file)
   const getNum = () => {
     return new Promise((resolve, reject) => {
-      s3.listObjects({ Bucket: "softi-nyoi2" }, function (err, result) {
+      s3.listObjects({ Bucket: "softi-iteration" }, function (err, result) {
         if (err) reject(err);
         if (result) resolve(result.Contents.length);
       });
@@ -31,14 +32,15 @@ videoControllers.uploadFile = async (req, res, next) => {
   file.originalname = `${req.query.title}_${req.query.image}.webm`;
   const fileStream = fs.createReadStream(file.path);
   const params = {
-    Bucket: "softi-nyoi2",
+    Bucket: "softi-iteration",
+    //once users are created,add ${username}
     Key: `record_${num}.webm`,
     Body: fileStream,
   };
   await s3.upload(params, function (err, data) {
     if (err) {
       next({
-        log: "error while upload image to s3",
+        log: "error while uploading image to s3",
         status: 500,
         message: err,
       });
@@ -50,8 +52,9 @@ videoControllers.uploadFile = async (req, res, next) => {
 
 videoControllers.fetchFiles = async (req, res, next) => {
   const params = {
-    Bucket: "softi-nyoi2",
+    Bucket: "softi-iteration",
   };
+  console.log(process.env.accessKeyId);
 
   const getNum = () => {
     return new Promise((resolve, reject) => {
@@ -64,7 +67,7 @@ videoControllers.fetchFiles = async (req, res, next) => {
 
   const getObject = (i) => {
     const objParam = {
-      Bucket: "softi-nyoi2",
+      Bucket: "softi-iteration",
       Key: "record_" + i + ".webm",
     };
 
