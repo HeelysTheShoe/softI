@@ -3,33 +3,23 @@ import React from 'react';
 import { renderWithProviders } from '../testing-utils/renderWithProviders'
 import Home from '../client/components/Home'
 
+jest.mock('../client/components/QuestionBox', () => () => {
+  const FakeQuestionBox = "default-awesome-component-mock";
+  return <FakeQuestionBox />;
+});
+
+jest.mock('../client/components/MySessions', () => () => {
+  const FakeMySessions = "default-awesome-component-mock";
+  return <FakeMySessions />;
+});
+
 describe('Home page renders', () => {
-    
-    jest.mock('./QuestionBox', () => ({
-      __esModule: true,
-      QuestionBox: () => {
-        return <mock-questionBox data-testid="questionBox"/>;
-      },
-    }));
-
-    jest.mock('./MySessions', () => ({
-      __esModule: true,
-      QuestionBox: () => {
-        return <mock-questionBox data-testid="questionBox"/>;
-      },
-    }));
-
 
     test('Content is rendered', () => {
-      const res = renderWithProviders(<Home/>)
       
-
+      const res = renderWithProviders(<Home/>)
+      expect(res.getByText('Press "Start" to begin interview session.')).toBeInTheDocument();
+      expect(res.getByRole('button', {name: 'Start'})).toBeInTheDocument();
     })
 
-    test('Login Button takes you to home', () =>{
-        
-    })
-
-
-  
   })

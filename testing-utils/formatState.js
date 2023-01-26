@@ -12,7 +12,7 @@ export function formatState (object){
           "Dicuss any positive contributions you've made to your previous organization, be as specific as possible with real world examples.",
         ],
         questionSet: [],
-        isLoggedIn: 'Blah',
+        isLoggedIn: false,
         isSessionStarted: false,
         user: {},
         currentQuestion: 0
@@ -25,5 +25,6 @@ export function formatState (object){
             return 'Invalid key in input'
         }
     }
+    console.log(initialState)
     return initialState
 }
