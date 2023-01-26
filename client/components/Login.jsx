@@ -10,7 +10,8 @@ export default function Login() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     username: '',
-    password: ''
+    password: '',
+    veryifyUser: verifyUser
   }); 
 
   const userSetter = (event) => {
