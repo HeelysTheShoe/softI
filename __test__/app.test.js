@@ -1,16 +1,16 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { findAllByText, findByText, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import App from '../client/App.jsx'
 import { renderWithProviders, initalState } from '../testing-utils/renderWithProviders'
+import userEvent from '@testing-library/user-event'
 import { formatState } from '../testing-utils/formatState'
+import { mockFetchVideo } from '../testing-utils/mockFetchVideo'
 
 
-const mockedNavigate = jest.fn();
-
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => mockedNavigate
-}));
+// jest.mock('react-router-dom', () => ({
+//   ...jest.requireActual('react-router-dom'),
+//   useNavigate: () => mockedNavigate
+// }));
 
 // then you should be able to:
 // expect(mockedNavigate).toHaveBeenCalledWith('/home');
@@ -24,18 +24,32 @@ jest.mock('react-router-dom', () => ({
 }));
 
 
-xdescribe('Login functionality', () => {
+
+describe('Login functionality', () => {
   afterEach(() => { fetch.resetMocks() });
 
 
-  test('Login button logs you in', () => {
+  test('Login button logs you in', async () => {
+
+    const jsDomAlert = window.alert;
+    window.alert = () => { };
+
     const logIn = { loggedIn: true };
-    fetch.mockResponseOnce(JSON.stringify(logIn))
+    fetch.mockResponseOnce(JSON.stringify(logIn));
+
+    let video = await mockFetchVideo();
+    fetch.mockResponseOnce(JSON.stringify(video));
+
+
     const res = renderWithProviders(<App />);
-    expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
-    mockedUsedNavigate.mockReturnValueOnce(renderWithProviders(<App />, { isLoggedIn: true }, ['/home']))
-    fireEvent.click(screen.getByRole('button', { name: 'Login' }));
-    expect(mockedUsedNavigate).toBeCalledWith(['/home']);
-    expect(screen.getByText('Press "Start" to begin interview session.')).toBeInTheDocument();
+    const user = userEvent.setup();
+    
+    await user.click(screen.getByText('Login'))
+
+    expect(await screen.findByText('Press "Start" to begin interview session.')).toBeInTheDocument();
+
+    
+    
   })
 });
+
