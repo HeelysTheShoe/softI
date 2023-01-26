@@ -28,21 +28,19 @@ export const questionSlice = createSlice({
   name: "question",
   initialState,
   reducers: {
-    // display: (state, action) => {
-    //   console.log(action);
-    //   // console.log(state.value);
-    // },
     userLogin: (state, action) => {
+      state.user.username = action.payload; 
       state.isLoggedIn = true;
+      console.log('inside redux', state.user.username)
     },
-    startSession: (state, action) => {
+    startSession: (state) => {
       state.isSessionStarted = true;
       state.questionSet = pickQuestion(state.questions);
     },
-    nextQuestion: (state, action) => {
+    nextQuestion: (state) => {
       state.currentQuestion++;
     },
-    endSession: (state, action) => {
+    endSession: (state) => {
       state.questionSet = [];
       state.currentQuestion = 0;
       state.isSessionStarted = false;

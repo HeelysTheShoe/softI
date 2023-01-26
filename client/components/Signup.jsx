@@ -19,7 +19,6 @@ export default function Signup() {
 
   const createUser = (e) => {
     e.preventDefault(); 
-    //http://localhost:3000/usersignup
     fetch('http://localhost:3000/usersignup', {
         method: 'POST',
         headers: {
@@ -30,7 +29,6 @@ export default function Signup() {
         .then((data)=>data.json())
         .then((data)=>{
             if (data.userCreated === true){
-              console.log('inside userCreated if');
               navigate('/');
             } else{
               alert("Error signing up. Please try again")
@@ -43,7 +41,7 @@ export default function Signup() {
       <div className='loginBox'>
         <h1>
           <img id='logo' src={logo}></img>
-          Signup with Softi
+          <p> Signup with Softi</p>
         </h1>
         <form id='loginForm' method = 'post'>
           <input

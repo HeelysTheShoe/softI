@@ -10,7 +10,7 @@ export default function Login() {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     username: '',
-    password: ''
+    password: '',
   }); 
 
   const userSetter = (event) => {
@@ -31,6 +31,8 @@ export default function Login() {
         .then((data)=>data.json())
         .then((data)=>{
             if (data.loggedIn === true){
+              //change to '/userPage' once that is set up
+              dispatch(userLogin(user.username));
               return navigate('/home');
             }else{
                 alert("Wrong username or password. Please try again.")
@@ -43,8 +45,9 @@ export default function Login() {
       <div className='loginBox'>
         <h1>
           <img id='logo' src={logo}></img>
-          Softi
+           Softi
         </h1>
+        <p> Your Interviewing Pal </p>
         <form id='loginForm' method = 'post'>
           <input
             type='text'
@@ -60,11 +63,13 @@ export default function Login() {
             placeholder='Password'
             onChange = {(event) => {userSetter(event)}}
             required></input>
-            <button className='login-btn' onClick={(e) => {verifyUser(e)}}>
+            <button className='login-btn' onClick={(e) => {
+              verifyUser(e)}
+                }>
               Login
             </button>
         </form>
-        <Link to='/signup'> <p style = {{color: 'white'}}>Don't have an account? Sign up here</p> </Link>
+      <Link to='/signup'> <p style = {{color: 'white', fontSize: '15px'}}>Don't have an account? <br></br>Sign up here</p> </Link>
       </div>
     </div>
   );

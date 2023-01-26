@@ -33,7 +33,7 @@ videoControllers.uploadFile = async (req, res, next) => {
   const fileStream = fs.createReadStream(file.path);
   const params = {
     Bucket: "softi-iteration",
-    //once users are created, replace record with ${username}
+    //once users are created,add ${username}
     Key: `record_${num}.webm`,
     Body: fileStream,
   };
